@@ -1,0 +1,282 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: "Dosis", sans-serif;
+  font-size: 16px;
+  color: #1e4040;
+}
+
+a {
+  color: #71d99e;
+}
+
+header,
+footer {
+  background-color: #1e4040;
+  color: #71d99e;
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+p {
+  margin-bottom: 15px;
+}
+
+main,
+aside {
+  padding: 20px 5%;
+}
+
+img {
+  border-radius: 5px;
+  box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, 0.2);
+  max-width: 100%;
+}
+
+/* CSS OUTER GRID STYLES */
+.outer-grid {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 70px 1fr;
+  grid-template-columns: 90px 1fr;
+  grid-template-areas:
+    "alias-header alias-header"
+    "alias-innergrid alias-innergrid";
+}
+
+.outer-grid-expanded {
+  grid-template-areas:
+    "alias-header alias-header"
+    "alias-nav alias-innergrid";
+}
+
+.hide-nav {
+  display: none;
+}
+
+header {
+  grid-area: alias-header;
+}
+
+nav {
+  grid-area: alias-nav;
+}
+
+/* INNER GRID STYLES */
+.inner-grid {
+  overflow-y: scroll;
+  display: grid;
+  grid-area: alias-innergrid;
+  grid-template-rows: 1fr auto 60px;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "alias-main alias-main"
+    "alias-aside alias-aside"
+    "alias-footer alias-footer";
+}
+main {
+  grid-area: alias-main;
+}
+aside {
+  grid-area: alias-aside;
+}
+footer {
+  grid-area: alias-footer;
+}
+
+/* HEADER STYLES */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+.left-header {
+  display: flex;
+  align-items: center;
+}
+
+.fa-bars {
+  margin-right: 10px;
+}
+
+.fa-bars:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.right-header {
+  display: flex;
+}
+
+.header-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.header-link i {
+  font-size: 0.8rem;
+}
+
+/* NAV STYLES */
+nav {
+  /* more space on the top of the nav */
+  padding-top: 20px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-link {
+  /* display flex, make the flex alignment vertical, center all objects, space them 15px from eachother */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.nav-link a {
+  color: #1e4040;
+  /* remove underlines */
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+/* SIDEBAR STYLES */
+
+aside {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* FOOTER STYLES */
+
+footer p {
+  color: white;
+  margin: 0;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* COLLAGE */
+
+.collage {
+  height: 550px;
+  display: grid;
+  /* creates 3 large columns for the images with 2 small columns that provide spacing between the pics */
+  grid-template-columns: 1fr 40px 1fr 40px 1fr;
+  align-items: center;
+}
+
+.collage * {
+  /* aligns the images on one row because otherwise they'd be diagonal to eachother */
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.collage-1 {
+  /* establishes how many grid squares are taken up by each image */
+  grid-column-start: 1;
+  grid-column-end: 3;
+  z-index: 1;
+  transform: rotate(-3deg);
+}
+
+.collage-2 {
+  /* this image takes up more grid squares than the other two to make it bigger in the middle */
+  grid-column-start: 2;
+  grid-column-end: 5;
+  /* this makes the middle image sit on top of the other 2 */
+  z-index: 2;
+  /* more pronounced box shadow */
+  box-shadow: 2px 4px 10px 2px rgba(0, 0, 0, 0.5);
+}
+
+.collage-3 {
+  grid-column-start: 4;
+  grid-column-end: 6;
+  z-index: 1;
+  transform: rotate(3deg);
+}
+
+/* BREAK POINTS */
+/* mobile */
+@media (min-width: 576px) {
+  nav {
+    display: block !important;
+  }
+  .outer-grid {
+    grid-template-areas:
+      "alias-header alias-header"
+      "alias-nav alias-innergrid";
+  }
+  .fa-bars {
+    display: none;
+  }
+}
+/* tablet+ */
+@media (min-width: 992px) {
+  .inner-grid {
+    grid-template-rows: 1fr 60px;
+    grid-template-columns: minmax(auto, 700px) 1fr;
+    grid-template-areas:
+      "alias-main alias-aside"
+      "alias-footer alias-footer";
+  }
+}
+
+aside {
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* desktop */
+@media (min-width: 1440px) {
+  .outer-grid {
+    /* transforms the grid of the outer-grid class to be 2x3 to account for the 3-grid headerand so the whole page comes to the center at large sizes */
+    grid-template-columns: 1fr 950px 1fr;
+    grid-template-areas:
+      "alias-header alias-header alias-header"
+      "alias-nav alias-innergrid alias-innergrid";
+  }
+
+  header {
+    display: grid;
+    /* creates three grid sections for the header, one for the logo, one for empty space, and one for the links */
+    grid-template-columns: 1fr 950px 1fr;
+    grid-template-areas: "alias-lh . alias-rh";
+  }
+
+  .left-header {
+    grid-area: alias-lh;
+    /* puts the logo at the right-most end of it's grid section:  */
+    justify-self: end;
+  }
+
+  .right-header {
+    grid-area: alias-rh;
+    /* puts the links at the left-most end of their grid section:  */
+    justify-self: start;
+  }
+
+  nav {
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 20px;
+  }
+}
